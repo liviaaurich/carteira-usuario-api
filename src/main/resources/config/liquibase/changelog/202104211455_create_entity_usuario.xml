@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="202104211455-1" author="livia.aurich" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" sequenceName="SEQ_USUARIO" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="202104211455-2" author="liviaaurich" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB_USUARIO">
+            <column name="ID" type="NUMBER" remarks="Chave primária da tabela TB_USUARIO">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(50)" remarks="Coluna que armazena o email da conta">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="SENHA" type="VARCHAR(100)" remarks="Coluna que armazena a senha da conta">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NOME_COMPLETO" type="VARCHAR(50)" remarks="Coluna que armazena o nome completo do usuário">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CPF" type="VARCHAR(11)" remarks="Coluna que armazena o CPF do usuário comum">
+                <constraints unique="true"/>
+            </column>
+            <column name="CNPJ" type="VARCHAR(14)" remarks="Coluna que armazena o CNPJ do usuário logísta">
+                <constraints unique="true"/>
+            </column>
+            <column name="TIPO_USUARIO" type="varchar(10)" remarks="Coluna que armazena o tipo do respectivo usuário">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="TB_USUARIO" constraintName="USUARIO_PK" columnNames="ID"/>
+    </changeSet>
+
+</databaseChangeLog>

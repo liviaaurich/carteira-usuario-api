@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="202104211600-1" author="livia.aurich" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" sequenceName="SEQ_TRANSACAO" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="202104211600-2" author="liviaaurich" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB_TRANSACAO">
+            <column name="ID" type="NUMBER" remarks="Chave primária da tabela TB_TRANSACAO.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALOR" type="NUMERIC(15, 2)" remarks="Valor que envolvido na transação." defaultValue="0.00">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_PAGADOR" type="NUMBER" remarks="Coluna que referencia o usuário pagador.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_BENEFICIARIO" type="NUMBER" remarks="Coluna que referencia o usuário beneficiado.">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="TB_TRANSACAO" constraintName="TRANSACAO_PK" columnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="TB_TRANSACAO" baseColumnNames="ID_PAGADOR" constraintName="FK_PAGADOR_USUARIO"
+                                 referencedTableName="TB_USUARIO" referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="TB_TRANSACAO" baseColumnNames="ID_BENEFICIARIO" constraintName="FK_BENEFICIARIO_USUARIO"
+                                 referencedTableName="TB_USUARIO" referencedColumnNames="ID"/>
+    </changeSet>
+
+</databaseChangeLog>

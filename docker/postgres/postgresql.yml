@@ -1,0 +1,9 @@
+version: '2'
+services:
+  postgresql:
+    image: postgres:12.1
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - 5432:5432

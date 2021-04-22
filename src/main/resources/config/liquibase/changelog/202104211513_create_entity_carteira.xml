@@ -5,17 +5,17 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="202104211513-1" author="liviaaurich" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TB_CARTEIRA">
-            <column name="ID" type="NUMBER" remarks="Chave primária da tabela TB_CARTEIRA">
+        <createTable tableName="tb_carteira">
+            <column name="id" type="NUMBER" remarks="Chave primária da tabela TB_CARTEIRA">
                 <constraints nullable="false"/>
             </column>
-            <column name="DINHEIRO" type="NUMERIC(15, 2)" remarks="Valor que o usuário possui na carteira" defaultValue="0.00">
+            <column name="dinheiro" type="NUMERIC(15, 2)" remarks="Valor que o usuário possui na carteira" defaultValue="0.00">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="TB_CARTEIRA" constraintName="CARTEIRA_PK" columnNames="ID"/>
-        <addForeignKeyConstraint baseTableName="TB_CARTEIRA" baseColumnNames="ID" constraintName="FK_CARTEIRA_USUARIO"
-                                 referencedTableName="TB_USUARIO" referencedColumnNames="ID"/>
+        <addPrimaryKey tableName="tb_carteira" constraintName="CARTEIRA_PK" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="tb_carteira" baseColumnNames="id" constraintName="FK_CARTEIRA_USUARIO"
+                                 referencedTableName="tb_usuario" referencedColumnNames="id"/>
     </changeSet>
 
 </databaseChangeLog>

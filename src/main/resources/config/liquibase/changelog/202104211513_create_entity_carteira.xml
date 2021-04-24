@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="202104211513-1" author="liviaaurich" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="tb_carteira">
+            <column name="id" type="NUMBER" remarks="Chave primária da tabela TB_CARTEIRA">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dinheiro" type="NUMERIC(15, 2)" remarks="Valor que o usuário possui na carteira" defaultValue="0.00">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="tb_carteira" constraintName="CARTEIRA_PK" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="tb_carteira" baseColumnNames="id" constraintName="FK_CARTEIRA_USUARIO"
+                                 referencedTableName="tb_usuario" referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

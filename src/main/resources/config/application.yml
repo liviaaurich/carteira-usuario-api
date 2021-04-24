@@ -41,7 +41,13 @@ spring:
     enabled: true
     change-log: classpath:/liquibase/master.xml
     default-schema: public
-    drop-first: true
+#    drop-first: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:keys/liviaaurich-pkey.pem
 
 server:
   port: 8081

@@ -34,3 +34,6 @@ O backend pode ser iniciado localmente fora da IDE através do comando dentro do
 ```` Java
     $ ./mvnw
 ```` 
+
+## Proposta de melhoria na arquitetura
+* Dividir a aplicação em microserviços, tendo um por exemplo, responsável por toda parte de autenticação do usuário. 

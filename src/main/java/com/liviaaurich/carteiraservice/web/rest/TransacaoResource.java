@@ -2,7 +2,6 @@ package com.liviaaurich.carteiraservice.web.rest;
 
 import com.liviaaurich.carteiraservice.service.TransacaoService;
 import com.liviaaurich.carteiraservice.service.dto.TransacaoDTO;
-import com.liviaaurich.carteiraservice.service.dto.UsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ public class TransacaoResource {
 
     private final TransacaoService transacaoService;
 
-    private static final String API_TRANSACOES = "/transacoes";
+    private static final String API_TRANSACOES = "/api/transacoes/";
 
     @PostMapping
     public ResponseEntity<TransacaoDTO> salvar(@Valid @RequestBody TransacaoDTO transacaoDTO) throws URISyntaxException {

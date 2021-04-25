@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -35,10 +34,10 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
-        Usuario usuario = mapper.toEntity(usuarioDTO);
+        formatarCampos(usuarioDTO);
 
+        Usuario usuario = mapper.toEntity(usuarioDTO);
         verificarDuplicidade(usuarioDTO);
-        formatarCampos(usuario);
 
         return mapper.toDto(repository.save(usuario));
     }
@@ -47,11 +46,11 @@ public class UsuarioService {
         return repository.obterTodos();
     }
 
-    private void formatarCampos(Usuario usuario) {
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+    private void formatarCampos(UsuarioDTO usuarioDTO) {
+        usuarioDTO.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
 
-        usuario.setCpf(FuncoesUtil.formatarCampoNumerico(usuario.getCpf()));
-        usuario.setCnpj(FuncoesUtil.formatarCampoNumerico(usuario.getCnpj()));
+        usuarioDTO.setCpf(FuncoesUtil.formatarCampoNumerico(usuarioDTO.getCpf()));
+        usuarioDTO.setCnpj(FuncoesUtil.formatarCampoNumerico(usuarioDTO.getCnpj()));
     }
 
     private void verificarDuplicidade(UsuarioDTO usuarioDTO) {

@@ -46,7 +46,7 @@ public class TransacaoService {
     }
 
     private void autorizarTransferencia() {
-        if(AutorizacaoEnum.AUTORIZADO.equals(feignService.autorizarTransferencia().getMessage())) {
+        if(AutorizacaoEnum.AUTORIZADO.getDescricao().equals(feignService.autorizarTransferencia().getMessage())) {
             return;
         }
         throw new ParametrizedMessageException(ConstantsUtil.ERRO_AUTORIZACAO, ConstantsUtil.ERROR_TITLE);

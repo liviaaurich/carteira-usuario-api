@@ -1,7 +1,6 @@
 package com.liviaaurich.carteiraservice.service;
 
 import com.liviaaurich.carteiraservice.repository.CarteiraRepository;
-import com.liviaaurich.carteiraservice.repository.TransacaoRepository;
 import com.liviaaurich.carteiraservice.service.event.TransacaoEvent;
 import com.liviaaurich.carteiraservice.service.util.ConstantsUtil;
 import com.liviaaurich.carteiraservice.web.rest.errors.ParametrizedMessageException;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
-
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -27,8 +24,9 @@ public class CarteiraService {
     }
 
     public void verificarCarteiraExistente(Long idUsuario) {
-        Optional.of(repository.existsById(idUsuario)).orElseThrow(
-                () -> new ParametrizedMessageException(ConstantsUtil.ERRO_CARTEIRA_USUARIO_INEXISTENTE, ConstantsUtil.ERROR_TITLE));
+        if(!repository.existsById(idUsuario)) {
+            throw new ParametrizedMessageException(ConstantsUtil.ERRO_CARTEIRA_USUARIO_INEXISTENTE, ConstantsUtil.ERROR_TITLE);
+        }
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)

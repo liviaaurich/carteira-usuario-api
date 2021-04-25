@@ -43,4 +43,5 @@ public class UsuarioDTO implements Serializable {
     private TipoUsuarioEnum tipoUsuario;
 
     private CarteiraDTO carteira = new CarteiraDTO();
+
 }

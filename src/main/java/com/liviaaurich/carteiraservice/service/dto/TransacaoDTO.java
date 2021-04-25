@@ -1,6 +1,6 @@
 package com.liviaaurich.carteiraservice.service.dto;
 
-import com.liviaaurich.carteiraservice.domain.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +12,7 @@ public class TransacaoDTO {
 
     private Double valor;
 
+    @JsonIgnore
     private Long idPagador;
 
     private Long idBeneficiado;

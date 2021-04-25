@@ -27,7 +27,7 @@ public class UsuarioResource {
 
     private final UsuarioService usuarioService;
 
-    private static final String API_USUARIOS = "/usuarios";
+    private static final String API_USUARIOS = "/api/usuarios/";
 
     @PostMapping
     public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO usuarioDTO) throws URISyntaxException {

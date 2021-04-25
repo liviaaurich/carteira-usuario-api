@@ -51,6 +51,11 @@ spring:
         jwt:
           public-key-location: classpath:keys/liviaaurich-pkey.pem
 
+  jackson:
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: true
+      FAIL_ON_IGNORED_PROPERTIES: true
+
 server:
   port: 8081
 

@@ -14,6 +14,8 @@
 # ===================================================================
 
 spring:
+  application:
+    name: carteira-usuario-api
   profiles:
     active: dev
     include:
@@ -51,6 +53,10 @@ spring:
 
 server:
   port: 8081
+
+autorizador:
+  name: transferencia
+  url: https://run.mocky.io/v3
 
 # ===================================================================
 # Application specific properties

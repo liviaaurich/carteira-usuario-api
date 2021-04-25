@@ -2,7 +2,7 @@ version: '2'
 services:
   postgres:
     extends:
-      file: postgres/postgresql.yml
+      file: postgresql.yml
       service: postgresql
     container_name: postgresql
   redis:

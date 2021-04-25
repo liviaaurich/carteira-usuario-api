@@ -5,12 +5,15 @@ import com.liviaaurich.carteiraservice.repository.UsuarioRepository;
 import com.liviaaurich.carteiraservice.service.dto.UsuarioDTO;
 import com.liviaaurich.carteiraservice.service.dto.UsuarioListDTO;
 import com.liviaaurich.carteiraservice.service.mapper.UsuarioMapper;
+import com.liviaaurich.carteiraservice.service.util.ConstantsUtil;
+import com.liviaaurich.carteiraservice.service.util.FuncoesUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -25,20 +28,36 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioService {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioRepository repository;
 
-    private final UsuarioMapper usuarioMapper;
+    private final UsuarioMapper mapper;
 
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
-        Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-        return usuarioMapper.toDto(usuarioRepository.save(usuario));
+        Usuario usuario = mapper.toEntity(usuarioDTO);
+
+        verificarDuplicidade(usuarioDTO);
+        formatarCampos(usuario);
+
+        return mapper.toDto(repository.save(usuario));
     }
 
     public List<UsuarioListDTO> obterTodos() {
-        return usuarioRepository.obterTodos();
+        return repository.obterTodos();
+    }
+
+    private void formatarCampos(Usuario usuario) {
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+
+        usuario.setCpf(FuncoesUtil.formatarCampoNumerico(usuario.getCpf()));
+        usuario.setCnpj(FuncoesUtil.formatarCampoNumerico(usuario.getCnpj()));
+    }
+
+    private void verificarDuplicidade(UsuarioDTO usuarioDTO) {
+        FuncoesUtil.verificarDuplicidade(repository.existeEmailCadastrado(usuarioDTO), ConstantsUtil.ERRO_DUPLICIDADE_EMAIL);
+        FuncoesUtil.verificarDuplicidade(repository.existeCpfCnpjCadastrado(usuarioDTO),
+                usuarioDTO.getTipoUsuario().getMensagemDuplicada());
     }
 
 }

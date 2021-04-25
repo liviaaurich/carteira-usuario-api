@@ -3,6 +3,7 @@ package com.liviaaurich.carteiraservice.service;
 import com.liviaaurich.carteiraservice.domain.Usuario;
 import com.liviaaurich.carteiraservice.domain.security.AuthUser;
 import com.liviaaurich.carteiraservice.repository.UsuarioRepository;
+import com.liviaaurich.carteiraservice.service.util.ConstantsUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +19,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(s)
-                .orElseThrow(() -> new UsernameNotFoundException("erro.usuario-nao-encontrado"));
+                .orElseThrow(() -> new UsernameNotFoundException(ConstantsUtil.ERRO_USUARIO_NAO_ENCONTRADO));
         return new AuthUser(usuario);
     }
 }

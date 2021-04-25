@@ -1,5 +1,6 @@
 package com.liviaaurich.carteiraservice.domain.enumerations;
 
+import com.liviaaurich.carteiraservice.service.util.ConstantsUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -7,9 +8,9 @@ import lombok.Getter;
 @Getter
 public enum TipoUsuarioEnum {
 
-    COMUM(0, "Comum"),
-    LOGISTA(1, "Logista");
+    COMUM(0, ConstantsUtil.ERRO_DUPLICIDADE_CPF),
+    LOGISTA(1, ConstantsUtil.ERRO_DUPLICIDADE_CNPJ);
 
     private Integer codigo;
-    private String descricao;
+    private String mensagemDuplicada;
 }

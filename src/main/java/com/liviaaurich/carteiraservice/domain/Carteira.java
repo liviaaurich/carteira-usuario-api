@@ -25,7 +25,7 @@ public class Carteira implements Serializable {
     private Long id;
 
     @Column(name = "dinheiro")
-    private Double dinheiro;
+    private Double dinheiro = 0.0;
 
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)

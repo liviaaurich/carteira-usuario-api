@@ -16,7 +16,7 @@
             <column name="email" type="VARCHAR(50)" remarks="Coluna que armazena o email da conta">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="senha" type="VARCHAR(100)" remarks="Coluna que armazena a senha da conta">
+            <column name="senha" type="VARCHAR(300)" remarks="Coluna que armazena a senha da conta">
                 <constraints nullable="false"/>
             </column>
             <column name="nome_completo" type="VARCHAR(50)" remarks="Coluna que armazena o nome completo do usuário">

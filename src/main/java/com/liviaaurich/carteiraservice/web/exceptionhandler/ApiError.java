@@ -11,9 +11,8 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {
     private Integer status;
+    private LocalDateTime timestamp;
     private String type;
     private String title;
     private String detail;
-    private String userMessage;
-    private LocalDateTime timestamp;
 }

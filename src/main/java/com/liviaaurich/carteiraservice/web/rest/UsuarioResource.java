@@ -30,7 +30,7 @@ public class UsuarioResource {
     private static final String API_USUARIOS = "/api/usuarios/";
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO usuarioDTO) throws URISyntaxException {
+    public ResponseEntity<UsuarioDTO> incluir(@Valid @RequestBody UsuarioDTO usuarioDTO) throws URISyntaxException {
         log.debug("REST request to save Usuario : {}", usuarioDTO);
         UsuarioDTO result = usuarioService.salvar(usuarioDTO);
         return ResponseEntity.created(new URI(API_USUARIOS + result.getId()))
@@ -40,9 +40,7 @@ public class UsuarioResource {
     @PutMapping
     public ResponseEntity<UsuarioDTO> atualizar(@Valid @RequestBody UsuarioDTO usuarioDTO) throws URISyntaxException {
         log.debug("REST request to update Usuario : {}", usuarioDTO);
-        UsuarioDTO result = usuarioService.salvar(usuarioDTO);
-        return ResponseEntity.created(new URI(API_USUARIOS + result.getId()))
-                .body(result);
+        return ResponseEntity.ok(usuarioService.salvar(usuarioDTO));
     }
 
     @Timed

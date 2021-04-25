@@ -15,7 +15,7 @@ Premissas
 Na pasta **docker** localizado na raiz do repositório existe um docker compose que já prepara os containers necessários para a aplicação rodar.
 Utilize o comando abaixo para subir os containers:
 ```` Java
-    $ docker-compose -f docker-compose-dev.yml up -d
+    $ docker-compose -f postgresql.yml up -d
 ```` 
 
 Ao subir o container do Postgres, conecte no banco de dados com os seguintes dados:
@@ -35,5 +35,6 @@ O backend pode ser iniciado localmente fora da IDE através do comando dentro do
     $ ./mvnw
 ```` 
 
-## Proposta de melhoria na arquitetura
-* Dividir a aplicação em microserviços, tendo um por exemplo, responsável por toda parte de autenticação do usuário. 
+## Propostas de melhorias: 
+* Dividir a aplicação em microserviços, tendo um por exemplo, responsável por toda parte de autenticação do usuário;
+* Criação de roles para limitar o acesso a transferências quando o usuario for um logista. 

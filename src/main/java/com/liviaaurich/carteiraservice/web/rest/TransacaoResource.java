@@ -25,7 +25,7 @@ public class TransacaoResource {
     private static final String API_TRANSACOES = "/api/transacoes/";
 
     @PostMapping
-    public ResponseEntity<TransacaoDTO> salvar(@Valid @RequestBody TransacaoDTO transacaoDTO) throws URISyntaxException {
+    public ResponseEntity<TransacaoDTO> incluir(@Valid @RequestBody TransacaoDTO transacaoDTO) throws URISyntaxException {
         log.debug("REST request to save Transacao : {}", transacaoDTO);
         TransacaoDTO result = transacaoService.salvar(transacaoDTO);
         return ResponseEntity.created(new URI(API_TRANSACOES + result.getId()))

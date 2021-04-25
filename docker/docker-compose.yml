@@ -5,8 +5,3 @@ services:
       file: postgresql.yml
       service: postgresql
     container_name: postgresql
-  redis:
-    extends:
-      file: redis.yml
-      service: redis
-    container_name: redis

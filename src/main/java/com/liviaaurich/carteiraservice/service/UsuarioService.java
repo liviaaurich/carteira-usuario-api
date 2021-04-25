@@ -8,7 +8,6 @@ import com.liviaaurich.carteiraservice.service.mapper.UsuarioMapper;
 import com.liviaaurich.carteiraservice.service.util.ConstantsUtil;
 import com.liviaaurich.carteiraservice.service.util.FuncoesUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,6 @@ import java.util.List;
  * representada pela entidade Usuario
  *
  */
-@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -42,6 +40,7 @@ public class UsuarioService {
         return mapper.toDto(repository.save(usuario));
     }
 
+    @Transactional(readOnly = true)
     public List<UsuarioListDTO> obterTodos() {
         return repository.obterTodos();
     }

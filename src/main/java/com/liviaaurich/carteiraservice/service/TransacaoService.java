@@ -40,7 +40,7 @@ public class TransacaoService {
         repository.save(transacao);
 
         applicationEventPublisher.publishEvent(new TransacaoEvent(transacaoDTO.getIdPagador(),
-                transacaoDTO.getValor(), transacaoDTO.getIdBeneficiado()));
+            transacaoDTO.getValor(), transacaoDTO.getIdBeneficiado()));
 
         return mapper.toDto(transacao);
     }

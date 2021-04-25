@@ -15,7 +15,7 @@
 
 spring:
   datasource:
-    url: jdbc:h2:mem:db_conta
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
     password: root
     driver-class-name: org.h2.Driver
   h2:
@@ -25,3 +25,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:keys/liviaaurich-pkey.pem
+
+autorizador:
+  name: transferencia
+  url: https://run.mocky.io/v3

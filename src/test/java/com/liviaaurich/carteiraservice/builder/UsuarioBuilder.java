@@ -17,7 +17,7 @@ public class UsuarioBuilder extends EntityGenerator<Usuario, UsuarioDTO> {
     @Override
     public UsuarioDTO createDto() {
         return UsuarioDTO.builder()
-                .email(TestUtilConstants.DEFAULT_STRING)
+                .email(TestUtilConstants.DEFAULT_EMAIL)
                 .nome(TestUtilConstants.DEFAULT_STRING)
                 .senha(TestUtilConstants.DEFAULT_STRING)
                 .cpf(TestUtilConstants.DEFAULT_CPF)

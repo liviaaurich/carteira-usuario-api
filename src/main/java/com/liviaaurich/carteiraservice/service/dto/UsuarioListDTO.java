@@ -21,4 +21,5 @@ public class UsuarioListDTO {
     private String cnpj;
 
     private TipoUsuarioEnum tipoUsuario;
+
 }

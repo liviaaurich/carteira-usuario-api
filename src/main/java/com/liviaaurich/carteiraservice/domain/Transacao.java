@@ -34,10 +34,10 @@ public class Transacao implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pagador")
-    private Usuario usuarioPagador;
+    private Usuario usuarioPagador = new Usuario();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_beneficiario")
-    private Usuario usuarioBeneficiado;
+    private Usuario usuarioBeneficiado = new Usuario();
 
 }

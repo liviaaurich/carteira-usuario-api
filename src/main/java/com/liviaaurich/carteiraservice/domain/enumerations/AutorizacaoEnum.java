@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum AutorizacaoEnum {
     AUTORIZADO("Autorizado"),
-    NÃO_AUTORIZADO("Não Autorizado");
+    NAO_AUTORIZADO("Não Autorizado");
 
     private final String descricao;
 }

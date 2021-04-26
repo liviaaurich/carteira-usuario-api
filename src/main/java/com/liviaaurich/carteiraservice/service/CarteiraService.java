@@ -1,18 +1,16 @@
 package com.liviaaurich.carteiraservice.service;
 
 import com.liviaaurich.carteiraservice.repository.CarteiraRepository;
-import com.liviaaurich.carteiraservice.repository.TransacaoRepository;
 import com.liviaaurich.carteiraservice.service.event.TransacaoEvent;
 import com.liviaaurich.carteiraservice.service.util.ConstantsUtil;
 import com.liviaaurich.carteiraservice.web.rest.errors.ParametrizedMessageException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
-
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -22,16 +20,20 @@ public class CarteiraService {
 
     private final CarteiraRepository repository;
 
+    @Transactional(readOnly = true)
     public Double obterSaldoUsuario(Long idUsuario) {
         return repository.obterSaldoUsuario(idUsuario).orElse(0.0);
     }
 
+    @Transactional(readOnly = true)
     public void verificarCarteiraExistente(Long idUsuario) {
-        Optional.of(repository.existsById(idUsuario)).orElseThrow(
-                () -> new ParametrizedMessageException(ConstantsUtil.ERRO_CARTEIRA_USUARIO_INEXISTENTE, ConstantsUtil.ERROR_TITLE));
+        if(!repository.existsById(idUsuario)) {
+            throw new ParametrizedMessageException(ConstantsUtil.ERRO_CARTEIRA_USUARIO_INEXISTENTE, ConstantsUtil.ERROR_TITLE);
+        }
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void processarEventoTransacao(TransacaoEvent event) {
         log.info("[INFO] Iniciando a transferencia");
         repository.atualizarSaldoUsuario(event.getId(), -event.getValor());

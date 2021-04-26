@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface TransacaoMapper {
 
+    @Mapping(target = "idBeneficiado", source = "usuarioBeneficiado.id")
     TransacaoDTO toDto(Transacao entity);
 
     @Mapping(source = "idPagador", target = "usuarioPagador.id")

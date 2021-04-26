@@ -1,7 +1,6 @@
 package com.liviaaurich.carteiraservice.builder;
 
 import com.liviaaurich.carteiraservice.domain.Usuario;
-import com.liviaaurich.carteiraservice.domain.enumerations.TipoUsuarioEnum;
 import com.liviaaurich.carteiraservice.service.dto.UsuarioDTO;
 import com.liviaaurich.carteiraservice.service.mapper.UsuarioMapper;
 import com.liviaaurich.carteiraservice.util.TestUtilConstants;
@@ -17,11 +16,10 @@ public class UsuarioBuilder extends EntityGenerator<Usuario, UsuarioDTO> {
     @Override
     public UsuarioDTO createDto() {
         return UsuarioDTO.builder()
-                .email(TestUtilConstants.DEFAULT_STRING)
+                .email(TestUtilConstants.DEFAULT_EMAIL)
                 .nome(TestUtilConstants.DEFAULT_STRING)
                 .senha(TestUtilConstants.DEFAULT_STRING)
                 .cpf(TestUtilConstants.DEFAULT_CPF)
-                .tipoUsuario(TipoUsuarioEnum.COMUM)
                 .build();
     }
 

@@ -1,6 +1,5 @@
 package com.liviaaurich.carteiraservice.service.dto;
 
-import com.liviaaurich.carteiraservice.domain.enumerations.TipoUsuarioEnum;
 import com.liviaaurich.carteiraservice.service.util.ConstantsUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,7 +39,6 @@ public class UsuarioDTO implements Serializable {
     @CNPJ(message = ConstantsUtil.ERRO_CNPJ_INVALIDO)
     private String cnpj;
 
-    private TipoUsuarioEnum tipoUsuario;
-
     private CarteiraDTO carteira = new CarteiraDTO();
+
 }

@@ -15,9 +15,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/api/usuarios/**").permitAll()
-                    .antMatchers(HttpMethod.PUT, "/api/usuarios/**").permitAll()
-                    .anyRequest().authenticated()
+                    .antMatchers(HttpMethod.GET, "/api/usuarios/**").authenticated()
+                    .antMatchers("/api/transacoes/**").authenticated()
+                    .anyRequest().permitAll()
                 .and()
                     .oauth2ResourceServer().jwt();
     }

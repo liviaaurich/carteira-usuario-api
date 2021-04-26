@@ -14,6 +14,7 @@ public final class ConstantsUtil {
     public static final String ERRO_OBRIGATORIEDADE_EMAIL="Campo e-mail é obrigatório.";
     public static final String ERRO_OBRIGATORIEDADE_NOME="Campo nome é obrigatório.";
     public static final String ERRO_OBRIGATORIEDADE_SENHA="Campo senha é obrigatório.";
+    public static final String ERRO_OBRIGATORIEDADE_CPF_CNPJ="É necessário informar o CPF/CNPJ.";
 
 
     public static final String ERRO_AUTORIZACAO="Transferencia não autorizada.";

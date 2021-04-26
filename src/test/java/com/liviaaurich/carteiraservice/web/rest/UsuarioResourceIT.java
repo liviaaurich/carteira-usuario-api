@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -64,7 +65,7 @@ public class UsuarioResourceIT extends BaseIntTeste {
                 .andExpect(status().isCreated()).andReturn().getResponse().getContentAsString(), UsuarioDTO.class);
 
         usuarioDTO.setNome("Teste");
-        this.getMockMvc().perform(post(BASE_URL)
+        this.getMockMvc().perform(put(BASE_URL)
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(usuarioDTO)))
             .andExpect(status().isOk());

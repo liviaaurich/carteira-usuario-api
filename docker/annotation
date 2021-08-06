@@ -1,0 +1,31 @@
+## Obs.:
+# * docker network create --driver bridge
+    # -> Crio uma rede para meus vários containers se conectar a ela e se comunicarem
+# * docker container run -d -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root --network carteira-usuario-network --name carteira-postgresql postgres:12.1
+    # -> Iniciando um container do postegresql especificando a rede
+
+# Passo a passo quando altero:
+    # -> docker container rm carteira-postgresql --force --volumes  (remover o container do banco)
+    # -> ./mvnw clean package (gerar um novo jar da aplicação)
+    # -> docker image build -t carteira-usuario-api . (builda a nova imagem com as modificações realizadas)
+    # -> docker container run -d -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root --network carteira-usuario-network --name carteira-postgresql postgres:12.1
+        # (subo um container na minha network com a imagem do banco)
+    # -> docker image prune (limpar as imagens none)
+    # -> docker container run --rm -p 8081:8081 -e DB_HOST=carteira-postgresql --network carteira-usuario-network carteira-usuario-api
+        # (subo a aplicação na minha network criada setando a variável de ambiente DB_HOST)
+
+# Construindo a imagem da aplicação manualmente:
+    # -> ./mvnw clean package (gerar um novo jar da aplicação)
+    # -> docker image build -t carteira-usuario-api . (builda a nova imagem com as modificações realizadas)
+
+# Construindo a imagem da aplicação com o maven:
+    # -> pom.xml linha 261 profile docker
+    # -> rodar: ./mvnw package -Pdocker (defino o profile que criei para gerar a imagem)
+
+## Anotações docker-compose
+# command: ["/wait-for-it.sh", "-t 30", "postgresql:5432", "--", "java", "-jar", "app.jar"]
+    # -> Rodo o wait-for-it.sh com o timeout de 30 segundos, ele vai ficar observando a porta especificada (postgresql:5432), quando ele ver que a porta ta
+        # disponível no host, ele deve executar os comandos "java", "-jar", "app.jar".
+# Escalando o serviço:
+    # -> Remover o ports do serviço no docker-compose
+    # -> Subir com o comando: docker-compose up --scale carteira-usuario-api=2

@@ -1,7 +1,26 @@
-version: '2'
+version: "3.9"
+
+networks:
+  carteira-usuario-network:
+    driver: bridge
+
 services:
   postgres:
     extends:
       file: postgresql.yml
       service: postgresql
-    container_name: postgresql
+    networks:
+      - carteira-usuario-network
+    container_name: "postgresql"
+
+  carteira-usuario-api:
+    image: carteira-usuario-api
+    command: ["/wait-for-it.sh", "postgresql:5432", "-t", "30", "--", "java", "-jar", "app.jar"]
+    environment:
+      DB_HOST: postgres
+    ports:
+      - "8081:8081"
+    networks:
+      - carteira-usuario-network
+    depends_on:
+      - postgres

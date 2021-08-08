@@ -26,6 +26,27 @@
 # command: ["/wait-for-it.sh", "-t 30", "postgresql:5432", "--", "java", "-jar", "app.jar"]
     # -> Rodo o wait-for-it.sh com o timeout de 30 segundos, ele vai ficar observando a porta especificada (postgresql:5432), quando ele ver que a porta ta
         # disponível no host, ele deve executar os comandos "java", "-jar", "app.jar".
+
 # Escalando o serviço:
     # -> Remover o ports do serviço no docker-compose
+    # -> Limpar os containers e volumes: docker-compose down --volumes
     # -> Subir com o comando: docker-compose up --scale carteira-usuario-api=2
+
+    ## Proxy reverso com Nginx:
+        # -> Um servidor http recebe a requisição e encaminha a mesma
+        # -> Adicionei o container dele no meu docker-compose (carteira-usuario-proxy)
+        # -> Agora consigo acessar no postman, porém quando eu acessar tenho que colocar a porta do nginx, já que é ele quem vai fazer o redirecionamento
+
+    ## Problemas
+        # -> Cada servidor/container armazena http session na própria memória, então precisamos de um lugar para compartilhar esses objetos que estão
+            # na sessão entre todos os containers (para isso vamos usar o redis - imagem no docker-compose)
+
+    ## Solução
+        ## Comando Redis - Terminal (importante ressaltar que ele armazena por chave e valor)
+            # -> keys *; set "nome da chave" "valor da chave" (ex: set nome Livia); get "nome da chave"; del "nome da chave";
+
+        ## Spring Session (para armazenar os objetos de sessão dentro do redis)
+            # -> Fornece um API e implementações para gerenciar informações de sessões, ele consegue fazer com que ao invés de armazenar as informações
+                # em memória, ele armazene por exemplo no Redis (tem um subprojeto inclusive chamado Spring Session Data Redis
+            # -> Dependencias adicionadas no pom (spring-boot-starter-data-redis, spring-session-data-redis)
+            # -> Resolvendo problemas com storage de Authorization Codes (Especialista Spring REST - 24.21)

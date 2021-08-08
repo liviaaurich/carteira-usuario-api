@@ -13,14 +13,31 @@ services:
       - carteira-usuario-network
     container_name: "postgresql"
 
+  redis:
+    image: redis:6.2.1-alpine
+    networks:
+      - carteira-usuario-network
+
   carteira-usuario-api:
     image: carteira-usuario-api
     command: ["/wait-for-it.sh", "postgresql:5432", "-t", "30", "--", "java", "-jar", "app.jar"]
     environment:
       DB_HOST: postgres
-    ports:
-      - "8081:8081"
+      SPRING_SESSION_STORE_TYPE: redis
+      SPRING_REDIS_HOST: redis
+#    ports:
+#      - "8081:8081"
     networks:
       - carteira-usuario-network
     depends_on:
       - postgres
+
+  carteira-usuario-proxy:
+    build: ./nginx
+    image: carteira-usuario-proxy
+    ports:
+      - "80:80"
+    networks:
+      - carteira-usuario-network
+    depends_on:
+      - carteira-usuario-api

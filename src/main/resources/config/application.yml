@@ -56,6 +56,9 @@ spring:
       FAIL_ON_UNKNOWN_PROPERTIES: true
       FAIL_ON_IGNORED_PROPERTIES: true
 
+  session:
+    store-type: none
+
 server:
   port: 8081
 
